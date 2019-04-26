@@ -15,7 +15,13 @@
 
 # include "mlx.h"
 # include "libft/libft.h"
+# include <fcntl.h>
+# include <unistd.h>
+# include <sys/stat.h> 
+# include <pthread.h>
+# include <time.h>
 # include <math.h>
+# include <stdio.h>
 
 # define GREEN_T "\x1b[32m"
 # define GREY_T "\x1b[37m"
@@ -27,10 +33,6 @@
 
 # define STRING_PUT(x, y, z, a, b, c) mlx_string_put(x, y, z, a, b, c)
 
-# define TO_RED 0 + i * 2
-# define TO_GREEN (0 + i * i)
-# define TO_BLUE (255 - i)
-
 # define L "Legend:"
 # define L0 "Press 'L' to show legend"
 # define L1 "Move: mouse click or '<-' '^' '->' keys"
@@ -40,6 +42,7 @@
 # define L5 "Change color spectrum: all num-pad keys"
 # define L6 "Reset color spectrum: press 'R' key"
 # define L7 "Reset zoom and position: press 'S' key"
+# define L8 "To crate FdF 'Screen Shot': press 'F' key"
 
 # define CARDIOID  tmp.r * tmp.r + tmp.i * tmp.i
 
@@ -51,6 +54,11 @@ typedef struct	s_mlx
 	int			height;
 
 	void		*bonus_win_ptr;
+	void		*bonus_img;
+	char		*bonus_img_ptr;
+	int			bonus_line_size;
+	int			bonus_endian;
+	int			bonus_bpp;
 
 	void		*img;
 	char		*img_ptr;
@@ -85,9 +93,16 @@ typedef struct	s_fract
 
 	t_colors	colors;
 
+	pthread_t	pthread_id[4];
+	int			pthread_y_start;
+	int			pthread_y_end;
+
 	short		type;
 	short		iso;
 	short		legend;
+
+	int			fdf;
+	int			line;
 
 	int			max_iters;
 	float		zoom;
@@ -99,6 +114,9 @@ typedef struct	s_fract
 	double		optimise_i;
 	double		optimise_r1;
 	double		optimise_i1;
+
+	t_complex	julia;
+	short		julia_move;
 }				t_fract;
 
 /*
@@ -107,10 +125,20 @@ typedef struct	s_fract
 int				create_color(int red, int green, int blue);
 int				create_color_c(float i, t_fract fract);
 
+void					set_colors_grey(t_fract *fract);
+void					set_colors_psyho_barbie(t_fract *fract);
+void					set_colors_dark_cyan(t_fract *fract);
+void					set_colors_purple_lemon(t_fract *fract);
+void					set_colors_red_n_yellow(t_fract *fract);
+void					set_colors_psyho_purple(t_fract *fract);
+void					set_colors_light_cyan(t_fract *fract);
+void					set_colors_hard_shit(t_fract *fract);
+
 /*
 ** fract_main.c
 */
-void			pixels(t_fract *fract);
+void			draw(t_fract *fract);
+void			*pixels(void *param);
 int				main(int ac, char **av);
 t_fract			*multi_window_checker(int ac, char **av);
 t_fract			*fract_creator(short type, int window_size);
@@ -128,6 +156,7 @@ t_mlx			*set_mlx(t_fract *fract, int width, int height);
 */
 int				key_controls(int key, t_fract *fract);
 int				mouse_press(int button, int x, int y, t_fract *fract);
+int				mouse_move(int x, int y, t_fract *fract);
 void			color_exit_reset(int key, t_fract *fract);
 void			green_and_blue(int key, t_fract *fract);
 
@@ -145,6 +174,11 @@ short			define_type(char *s);
 void			ft_err(char *err, int status);
 int				ft_exit(void *param);
 void			usage(void);
+void			info(t_fract *fract);
+
+t_complex		create_complex_j(int x, int y, t_fract *fract);
+
+
 
 /*
 ** fract_control_utils.c
@@ -160,5 +194,16 @@ int				legend(t_fract *fract);
 void			julia(t_fract *fract, int x, int y);
 void			mandel(t_complex c, t_fract *fract, int x, int y);
 void			newton(t_fract *fract, int x, int y);
+
+void			mandel_abs(t_fract *fract, int x, int y);
+void			mandel_4th(t_fract *fract, int x, int y);
+
+
+/*
+** fract_fdf.c
+*/
+void			create_file(t_fract *fract);
+void			write_to_file(t_fract *fract, int y, int i);
+void			fdf(t_fract *fract);
 
 #endif

@@ -31,6 +31,15 @@ t_complex	create_complex(int x, int y, t_fract *fract, short offset)
 	return (c);
 }
 
+t_complex	create_complex_j(int x, int y, t_fract *fract)
+{
+	t_complex c;
+
+	c.r = (x + fract->move_x - fract->mlx->width) / (fract->zoom * fract->mlx->width);
+	c.i = (y + fract->move_y - fract->mlx->height) / (fract->zoom * fract->mlx->height);
+	return (c);
+}
+
 short		define_type(char *s)
 {
 	if (!s)
@@ -41,6 +50,10 @@ short		define_type(char *s)
 		return (2);
 	if (ft_strequ(s, "newton"))
 		return (3);
+	if (ft_strequ(s, "mandelabs"))
+		return (4);
+	if (ft_strequ(s, "mandel4th"))
+		return (5);
 	return (0);
 }
 

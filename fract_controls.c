@@ -12,6 +12,18 @@
 
 #include "fract.h"
 
+int		mouse_move(int x, int y, t_fract *fract)
+{
+	if ((fract->type == 2 || fract->type == 4) && fract->julia_move == 1)
+	{
+		// printf("x: %d\ty:%d\n", x, y);
+		fract->julia.r = (float)x / (float)(2500) * 2 - 1;
+		fract->julia.i = (float)y / (float)(1400) * 2 - 1; 
+		redraw(fract);
+	}
+	return (1);
+}
+
 int		mouse_press(int button, int x, int y, t_fract *fract)
 {
 	if (button == 4)
@@ -53,7 +65,7 @@ void	color_exit_reset(int key, t_fract *fract)
 	if (key == 53)
 		ft_exit(NULL);
 	else if (key == 15)
-		set_colors(fract);
+		set_colors_grey(fract);
 	else if (key == 1)
 		set_(fract);
 	else if (key == 71)
@@ -70,8 +82,37 @@ void	color_exit_reset(int key, t_fract *fract)
 		green_and_blue(key, fract);
 }
 
+void	info(t_fract *fract)
+{
+	printf("color:\n\tred:\t%f\n\t\t%d\n\t\t%d\n\n", fract->colors.red.frequenc, fract->colors.red.phase, fract->colors.red.sign);
+	printf("\tgreen:\t%f\n\t\t%d\n\t\t%d\n\n", fract->colors.green.frequenc, fract->colors.green.phase, fract->colors.green.sign);
+	printf("\tblue:\t%f\n\t\t%d\n\t\t%d\n\n", fract->colors.blue.frequenc, fract->colors.blue.phase, fract->colors.blue.sign);
+
+
+}
+
 int		key_controls(int key, t_fract *fract)
 {
+	if (key == 3)
+		fdf(fract);
+	if (key == 46)
+		fract->julia_move = -fract->julia_move;	
+	if (key == 18)
+		set_colors_grey(fract);
+	if (key == 19)
+		set_colors_dark_cyan(fract);
+	if (key == 20)
+		set_colors_psyho_barbie(fract);
+	if (key == 21)
+		set_colors_purple_lemon(fract);
+	if (key == 22)
+		set_colors_red_n_yellow(fract);
+	if (key == 23)
+		set_colors_psyho_purple(fract);
+	if (key == 24)
+		set_colors_light_cyan(fract);
+	if (key == 25)
+		set_colors_hard_shit(fract);
 	if (key == 35)
 		bonus_win(fract);
 	else if (key == 37)

@@ -4,17 +4,19 @@ MLX= -L/usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 
 SRC=	fract_set.c \
 		fract_img.c \
+		fract_fdf.c \
 		fract_main.c \
 		fract_utils.c \
-		fract_fract.c \
 		fract_color.c \
+		fract_fract.c \
+		fract_fract2.c \
 		fract_controls.c \
 		fract_control_utils.c \
 		./libft/libft.a
 
 OBJ = $(SRC:%.c=%.o)
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 
 INCLUDES = fract.h
 
