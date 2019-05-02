@@ -14,12 +14,16 @@
 
 int		mouse_move(int x, int y, t_fract *fract)
 {
-	if ((fract->type == 2 || fract->type == 4) && fract->julia_move == 1)
+	if (fract->color_move == 1 || 
+		((fract->type == 2 || fract->type == 7) && fract->julia_move == 1))
 	{
-		// printf("x: %d\ty:%d\n", x, y);
+
 		fract->julia.r = (float)x / (float)(2500) * 2 - 1;
-		fract->julia.i = (float)y / (float)(1400) * 2 - 1; 
-		redraw(fract);
+		fract->julia.i = (float)y / (float)(1400) * 2 - 1;
+		if (fract->type == 7)
+			dragon(fract);
+		else
+			redraw(fract);
 	}
 	return (1);
 }
@@ -95,6 +99,8 @@ int		key_controls(int key, t_fract *fract)
 {
 	if (key == 3)
 		fdf(fract);
+	if (key == 8)
+		fract->color_move = -fract->color_move;
 	if (key == 46)
 		fract->julia_move = -fract->julia_move;	
 	if (key == 18)
@@ -135,6 +141,9 @@ int		key_controls(int key, t_fract *fract)
 		fract->move_y -= 20 / fract->zoom;
 	else
 		color_exit_reset(key, fract);
-	redraw(fract);
+	if (fract->type == 7)
+		dragon(fract);
+	else
+		redraw(fract);
 	return (1);
 }

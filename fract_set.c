@@ -18,6 +18,7 @@ void	set_(t_fract *fract)
 	fract->zoom = 1;
 	fract->iso = 0;
 	fract->julia_move = 1;
+	fract->color_move = -1;
 	fract->legend = 0;
 	fract->fdf = 0;
 	fract->line = 0;
@@ -34,10 +35,12 @@ void	set_colors(t_fract *fract)
 {
 	if (fract->type == 1)
 		set_colors_light_cyan(fract);
-	if (fract->type == 2)
+	else if (fract->type == 2)
 		set_colors_hard_shit(fract);
-	if (fract->type == 3)
+	else if (fract->type == 3)
 		set_colors_psyho_purple(fract);
+	else
+		set_colors_purple_lemon(fract);
 }
 
 void	set_colors_grey(t_fract *fract)

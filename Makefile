@@ -6,10 +6,12 @@ SRC=	fract_set.c \
 		fract_img.c \
 		fract_fdf.c \
 		fract_main.c \
+		fract_line.c \
 		fract_utils.c \
 		fract_color.c \
 		fract_fract.c \
 		fract_fract2.c \
+		fract_dragon.c  \
 		fract_controls.c \
 		fract_control_utils.c \
 		./libft/libft.a

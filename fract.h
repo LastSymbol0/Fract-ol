@@ -31,6 +31,10 @@
 # define GREEN(x) (int)(x) << 8
 # define RED(x) (int)(x) << 16
 
+# define TO_RED 80 + line.start.x
+# define TO_GREEN 250 - line.start.x
+# define TO_BLUE 275 - line.start.x
+
 # define STRING_PUT(x, y, z, a, b, c) mlx_string_put(x, y, z, a, b, c)
 
 # define L "Legend:"
@@ -39,12 +43,27 @@
 # define L2 "Zoom: mosue wheel or '+' '-' keys"
 # define L3 "Show iso-projection: press 'P' key"
 # define L4 "Change max iterations: 'home' and 'end' keys"
-# define L5 "Change color spectrum: all num-pad keys"
+# define L5 "Change color spectrum: all num-pad keys or digits for presets"
 # define L6 "Reset color spectrum: press 'R' key"
 # define L7 "Reset zoom and position: press 'S' key"
 # define L8 "To crate FdF 'Screen Shot': press 'F' key"
+# define L9 "Mouse move changes: 'M' for julia, 'C' for color"
+
 
 # define CARDIOID  tmp.r * tmp.r + tmp.i * tmp.i
+
+typedef struct	s_point
+{
+	int			x;
+	int			y;
+	int			z;
+}				t_point;
+
+typedef struct	s_line
+{
+	t_point		start;
+	t_point		end;
+}				t_line;
 
 typedef struct	s_mlx
 {
@@ -117,6 +136,7 @@ typedef struct	s_fract
 
 	t_complex	julia;
 	short		julia_move;
+	short		color_move;
 }				t_fract;
 
 /*
@@ -195,8 +215,9 @@ void			julia(t_fract *fract, int x, int y);
 void			mandel(t_complex c, t_fract *fract, int x, int y);
 void			newton(t_fract *fract, int x, int y);
 
-void			mandel_abs(t_fract *fract, int x, int y);
-void			mandel_4th(t_fract *fract, int x, int y);
+void			mandel_tricorn(t_fract *fract, int x, int y);
+void			mandel_5th(t_fract *fract, int x, int y);
+void			mandel_5th_slim(t_fract *fract, int x, int y);
 
 
 /*
@@ -205,5 +226,19 @@ void			mandel_4th(t_fract *fract, int x, int y);
 void			create_file(t_fract *fract);
 void			write_to_file(t_fract *fract, int y, int i);
 void			fdf(t_fract *fract);
+
+/*
+** fract_line.c
+*/
+void			put_line(t_line line, t_fract fract);
+void			line_y_bigger(t_line line, int delta_x, int delta_y, t_fract fract);
+void			line_x_bigger(t_line line, int delta_x, int delta_y, t_fract fract);
+void			swap_p(t_line *line, int *sign, int *sign_z);
+
+/*
+** fract_dragon.c
+*/
+void	dragon(t_fract *fract);
+
 
 #endif

@@ -50,10 +50,14 @@ short		define_type(char *s)
 		return (2);
 	if (ft_strequ(s, "newton"))
 		return (3);
-	if (ft_strequ(s, "mandelabs"))
+	if (ft_strequ(s, "mandel_5th"))
 		return (4);
-	if (ft_strequ(s, "mandel4th"))
+	if (ft_strequ(s, "mandel_5th_slim"))
 		return (5);
+	if (ft_strequ(s, "mandel_tricorn"))
+		return (6);
+	if (ft_strequ(s, "dragon"))
+		return (7);
 	return (0);
 }
 
@@ -79,8 +83,9 @@ void		usage(void)
 	ft_putendl("Usage:");
 	ft_putendl("\t./fractol type [WIN_SIZE] type [WIN_SIZE] ...\n");
 	ft_putstr(GREY_T);
-	ft_putendl("\t\tTypes:\t\tmandel, julia, newton");
-	ft_putendl("\t\tWin_size:\t1-4 (Default: 1)");
+	ft_putendl("\t\tTypes:\t\tmandel, julia, newton, mandel_5th, mandel_5th_slim, mandel_tricorn, dragon");
+	ft_putendl("\t\tWindow size:\t1-4 (Default: 1)");
 	ft_putstr(YELLOW_T);
-	ft_putendl("Example:\n\t./fractol newton 2 julia mandel 3\n");
+	ft_putendl("Example:\n\t./fractol julia 3\n");
+	ft_putendl("\t./fractol newton 2 mandel dragon 3\n");
 }

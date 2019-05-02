@@ -21,9 +21,13 @@ void	route(int x, int y, t_fract *fract)
 	else if (fract->type == 3)
 		newton(fract, x, y);
 	else if (fract->type == 4)
-		mandel_abs(fract, x, y);
+		mandel_5th(fract, x, y);
 	else if (fract->type == 5)
-		mandel_4th(fract, x, y);
+		mandel_5th_slim(fract, x, y);
+	else if (fract->type == 6)
+		mandel_tricorn(fract, x, y);
+	// else
+		// ft_err("Type undefined.\n", 1);
 }
 
 void	*pixels(void *param)
@@ -134,7 +138,10 @@ int		main(int ac, char **av)
 		usage();
 	else if ((fract = multi_window_checker(ac, av)) != NULL)
 	{
-		draw(fract);
+		if (fract->type == 7)
+			dragon(fract);
+		else
+			draw(fract);
 		mlx_string_put(fract->mlx->mlx_ptr, fract->mlx->win_ptr, 10, 0, 0, L0);
 		mlx_loop(fract->mlx->mlx_ptr);
 	}

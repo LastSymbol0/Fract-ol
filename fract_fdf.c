@@ -75,7 +75,6 @@ void	create_file(t_fract *fract)
 	int		fd;
 
 	fd = creat(ft_name_create("./fdf_maps/"), 0644);
-	printf("%d\n", fd);
 	fract->fdf = fd;
 }
 

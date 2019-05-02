@@ -64,6 +64,7 @@ int		legend(t_fract *fract)
 		STRING_PUT(fract->mlx->mlx_ptr, fract->mlx->win_ptr, 10, 120, 0, L6);
 		STRING_PUT(fract->mlx->mlx_ptr, fract->mlx->win_ptr, 10, 140, 0, L7);
 		STRING_PUT(fract->mlx->mlx_ptr, fract->mlx->win_ptr, 10, 160, 0, L8);
+		STRING_PUT(fract->mlx->mlx_ptr, fract->mlx->win_ptr, 10, 180, 0, L9);
 	}
 	else
 	{
