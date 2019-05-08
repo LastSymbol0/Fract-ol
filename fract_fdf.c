@@ -73,16 +73,23 @@ static char	*ft_name_create(char *pre)
 void	create_file(t_fract *fract)
 {
 	int		fd;
+	char	*name;
 
-	fd = creat(ft_name_create("./fdf_maps/"), 0644);
+	name = ft_name_create("./fdf_maps/");
+	fd = creat(name, 0644);
+	free(name);
 	fract->fdf = fd;
 }
 
 void	write_to_file(t_fract *fract, int y, int i)
 {
+	char	*s;
+
+	s = ft_itoa(i);
 	if (y > fract->line)
 		write(fract->fdf, "\n", 1);
-	write(fract->fdf, ft_itoa(i), ft_strlen(ft_itoa(i)));
+	write(fract->fdf, s, ft_strlen(s));
+	free(s);
 	write(fract->fdf, " ", 1);
 	fract->line = y;
 }

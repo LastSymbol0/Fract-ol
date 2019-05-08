@@ -147,7 +147,7 @@ void	set_colors_hard_shit(t_fract *fract)
 	fract->colors.blue.sign = -1;
 }
 
-t_mlx	*set_mlx(t_fract *fract, int width, int height)
+t_mlx	*set_mlx(t_fract *fract, int width, int height, void *mlx_p)
 {
 	t_mlx *mlx;
 
@@ -157,7 +157,8 @@ t_mlx	*set_mlx(t_fract *fract, int width, int height)
 	mlx->bpp = 4;
 	mlx->width = width;
 	mlx->height = height;
-	mlx->mlx_ptr = mlx_init();
+	mlx->mlx_ptr = mlx_p;
+	// mlx->mlx_ptr = mlx_init();
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, mlx->width, mlx->height,
 														"aillia's fract");
 	mlx->img = mlx_new_image(mlx->mlx_ptr, width, height);

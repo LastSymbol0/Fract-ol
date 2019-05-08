@@ -22,6 +22,8 @@
 # include <time.h>
 # include <math.h>
 # include <stdio.h>
+#include <sys/types.h>
+#include <signal.h>
 
 # define GREEN_T "\x1b[32m"
 # define GREY_T "\x1b[37m"
@@ -160,8 +162,8 @@ void					set_colors_hard_shit(t_fract *fract);
 void			draw(t_fract *fract);
 void			*pixels(void *param);
 int				main(int ac, char **av);
-t_fract			*multi_window_checker(int ac, char **av);
-t_fract			*fract_creator(short type, int window_size);
+int				multi_window_checker(int ac, char **av, void *mlx);
+t_fract			*fract_creator(short type, int window_size, void *mlx);
 void			route(int x, int y, t_fract *fract);
 
 /*
@@ -169,7 +171,7 @@ void			route(int x, int y, t_fract *fract);
 */
 void			set_colors(t_fract *fract);
 void			set_(t_fract *fract);
-t_mlx			*set_mlx(t_fract *fract, int width, int height);
+t_mlx			*set_mlx(t_fract *fract, int width, int height, void *mlx);
 
 /*
 ** fract_controls.c

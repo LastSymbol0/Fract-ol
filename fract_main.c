@@ -83,7 +83,7 @@ void	draw(t_fract *fract)
 		mlx_string_put(fract->mlx->mlx_ptr, fract->mlx->win_ptr, 10, 0, 0, L0);
 }
 
-t_fract	*fract_creator(short type, int window_size)
+t_fract	*fract_creator(short type, int window_size, void *mlx)
 {
 	t_fract *fract;
 
@@ -95,22 +95,32 @@ t_fract	*fract_creator(short type, int window_size)
 	fract->max_iters = 50;
 	set_(fract);
 	// create_file(fract);
-	fract->mlx = set_mlx(fract, 420 * window_size, 420 * window_size);
+	fract->mlx = set_mlx(fract, 420 * window_size, 420 * window_size, mlx);
 	// fract->mlx = set_mlx(fract, 180 * window_size, 120 * window_size);
 	set_colors(fract);
 	return (fract);
 }
 
-t_fract	*multi_window_checker(int ac, char **av)
+int		go(t_fract *fract)
+{
+		if (fract->type == 7)
+			dragon(fract);
+		else
+			draw(fract);
+		mlx_string_put(fract->mlx->mlx_ptr, fract->mlx->win_ptr, 10, 0, 0, L0);
+		return (1);	
+}
+
+int		multi_window_checker(int ac, char **av, void *mlx)
 {
 	int		i;
+	int		c;
 	int		win_s;
 	short	type;
-	pid_t	pid;
 
 	i = 0;
+	c = 0;
 	type = 0;
-	pid = getpid();
 	while (++i < ac)
 	{
 		if ((type = define_type(av[i])) == 0)
@@ -119,32 +129,25 @@ t_fract	*multi_window_checker(int ac, char **av)
 		{
 			if (i + 1 < ac && ft_isdigit(av[i + 1][0]))
 				win_s = ft_atoi(av[++i]);
-			if (i + 1 < ac)
-				fork();
-			if (getpid() == pid)
-				return (fract_creator(type, win_s));
-			pid = getpid();
+			c = go(fract_creator(type, win_s, mlx));
 		}
 		win_s = 1;
 	}
-	return (NULL);
+	if (c == 0)
+		return(0);
+	return (1);
 }
 
 int		main(int ac, char **av)
 {
-	t_fract *fract;
+	// t_fract *fract;
+	void	*mlx;
 
+	mlx = mlx_init();
 	if (ac < 2)
 		usage();
-	else if ((fract = multi_window_checker(ac, av)) != NULL)
-	{
-		if (fract->type == 7)
-			dragon(fract);
-		else
-			draw(fract);
-		mlx_string_put(fract->mlx->mlx_ptr, fract->mlx->win_ptr, 10, 0, 0, L0);
-		mlx_loop(fract->mlx->mlx_ptr);
-	}
+	else if ((multi_window_checker(ac, av, mlx)) == 1)
+		mlx_loop(mlx);
 	else
 		usage();
 	return (0);

@@ -65,6 +65,7 @@ int			ft_exit(void *param)
 {
 	if (param)
 		exit(0);
+	system("leaks -q fractol");
 	exit(0);
 }
 
