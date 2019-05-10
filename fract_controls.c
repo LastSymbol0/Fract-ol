@@ -86,15 +86,6 @@ void	color_exit_reset(int key, t_fract *fract)
 		green_and_blue(key, fract);
 }
 
-void	info(t_fract *fract)
-{
-	printf("color:\n\tred:\t%f\n\t\t%d\n\t\t%d\n\n", fract->colors.red.frequenc, fract->colors.red.phase, fract->colors.red.sign);
-	printf("\tgreen:\t%f\n\t\t%d\n\t\t%d\n\n", fract->colors.green.frequenc, fract->colors.green.phase, fract->colors.green.sign);
-	printf("\tblue:\t%f\n\t\t%d\n\t\t%d\n\n", fract->colors.blue.frequenc, fract->colors.blue.phase, fract->colors.blue.sign);
-
-
-}
-
 int		key_controls(int key, t_fract *fract)
 {
 	if (key == 3)

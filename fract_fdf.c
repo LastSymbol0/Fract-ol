@@ -12,7 +12,7 @@
 
 #include "fract.h"
 
-void	fdf(t_fract *fract)
+void		fdf(t_fract *fract)
 {
 	create_file(fract);
 	mlx_clear_window(fract->mlx->mlx_ptr, fract->mlx->win_ptr);
@@ -70,7 +70,7 @@ static char	*ft_name_create(char *pre)
 	return (ft_strjoin_upd(name, ".fdf"));
 }
 
-void	create_file(t_fract *fract)
+void		create_file(t_fract *fract)
 {
 	int		fd;
 	char	*name;
@@ -81,7 +81,7 @@ void	create_file(t_fract *fract)
 	fract->fdf = fd;
 }
 
-void	write_to_file(t_fract *fract, int y, int i)
+void		write_to_file(t_fract *fract, int y, int i)
 {
 	char	*s;
 

@@ -26,18 +26,15 @@ void	route(int x, int y, t_fract *fract)
 		mandel_5th_slim(fract, x, y);
 	else if (fract->type == 6)
 		mandel_tricorn(fract, x, y);
-	// else
-		// ft_err("Type undefined.\n", 1);
 }
 
 void	*pixels(void *param)
 {
-	int	x;
-	int	y;
-	t_fract *fract;
+	int		x;
+	int		y;
+	t_fract	*fract;
 
 	fract = (t_fract *)param;
-	// create_file(fract);
 	y = fract->pthread_y_start - 1;
 	while (++y <= fract->pthread_y_end)
 	{
@@ -60,7 +57,8 @@ void	draw(t_fract *fract)
 	fract_copy[2] = *fract;
 	fract_copy[3] = *fract;
 	if (fract->iso == 1)
-		ft_bzero(fract->mlx->bonus_img_ptr, fract->mlx->width * fract->mlx->height * sizeof(int));
+		ft_bzero(fract->mlx->bonus_img_ptr,
+			fract->mlx->width * fract->mlx->height * sizeof(int));
 	i = -1;
 	while (++i < 4)
 	{
@@ -68,47 +66,13 @@ void	draw(t_fract *fract)
 		fract_copy[i].pthread_y_end = fract_copy[i].mlx->height / 4 * (i + 1);
 		pthread_create(&(fract->pthread_id[i]), NULL, pixels, &fract_copy[i]);
 	}
-	i = -1;
-	while (++i < 4)
-	{
+	while (--i >= 0)
 		pthread_join((fract->pthread_id[i]), NULL);
-	}
 	mlx_put_image_to_window(fract->mlx->mlx_ptr, fract->mlx->win_ptr,
 												fract->mlx->img, 0, 0);
 	if (fract->iso == 1)
 		mlx_put_image_to_window(fract->mlx->mlx_ptr, fract->mlx->bonus_win_ptr,
 												fract->mlx->bonus_img, 0, 0);
-	// close(fract->fdf);
-	if (fract->legend == 0)
-		mlx_string_put(fract->mlx->mlx_ptr, fract->mlx->win_ptr, 10, 0, 0, L0);
-}
-
-t_fract	*fract_creator(short type, int window_size, void *mlx)
-{
-	t_fract *fract;
-
-	if (!(fract = (t_fract *)malloc(sizeof(t_fract))))
-		ft_err("Error malloc", 1);
-	if (window_size > 4 || window_size < 1)
-		window_size = 1;
-	fract->type = type;
-	fract->max_iters = 50;
-	set_(fract);
-	// create_file(fract);
-	fract->mlx = set_mlx(fract, 420 * window_size, 420 * window_size, mlx);
-	// fract->mlx = set_mlx(fract, 180 * window_size, 120 * window_size);
-	set_colors(fract);
-	return (fract);
-}
-
-int		go(t_fract *fract)
-{
-		if (fract->type == 7)
-			dragon(fract);
-		else
-			draw(fract);
-		mlx_string_put(fract->mlx->mlx_ptr, fract->mlx->win_ptr, 10, 0, 0, L0);
-		return (1);	
 }
 
 int		multi_window_checker(int ac, char **av, void *mlx)
@@ -134,17 +98,16 @@ int		multi_window_checker(int ac, char **av, void *mlx)
 		win_s = 1;
 	}
 	if (c == 0)
-		return(0);
+		return (0);
 	return (1);
 }
 
 int		main(int ac, char **av)
 {
-	// t_fract *fract;
 	void	*mlx;
 
 	mlx = mlx_init();
-	if (ac < 2)
+	if (ac < 2 || ac > 15)
 		usage();
 	else if ((multi_window_checker(ac, av, mlx)) == 1)
 		mlx_loop(mlx);

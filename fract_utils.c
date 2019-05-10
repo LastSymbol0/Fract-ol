@@ -31,15 +31,6 @@ t_complex	create_complex(int x, int y, t_fract *fract, short offset)
 	return (c);
 }
 
-t_complex	create_complex_j(int x, int y, t_fract *fract)
-{
-	t_complex c;
-
-	c.r = (x + fract->move_x - fract->mlx->width) / (fract->zoom * fract->mlx->width);
-	c.i = (y + fract->move_y - fract->mlx->height) / (fract->zoom * fract->mlx->height);
-	return (c);
-}
-
 short		define_type(char *s)
 {
 	if (!s)
@@ -84,7 +75,8 @@ void		usage(void)
 	ft_putendl("Usage:");
 	ft_putendl("\t./fractol type [WIN_SIZE] type [WIN_SIZE] ...\n");
 	ft_putstr(GREY_T);
-	ft_putendl("\t\tTypes:\t\tmandel, julia, newton, mandel_5th, mandel_5th_slim, mandel_tricorn, dragon");
+	ft_putendl("\t\tTypes:\t\tmandel, julia, newton, dragon");
+	ft_putendl("\t\t\t\t\tmandel_5th, mandel_5th_slim, mandel_tricorn");
 	ft_putendl("\t\tWindow size:\t1-4 (Default: 1)");
 	ft_putstr(YELLOW_T);
 	ft_putendl("Example:\n\t./fractol julia 3\n");

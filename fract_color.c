@@ -30,9 +30,12 @@ int	create_color_c(float i, t_fract fract)
 	color = (int)i << 24;
 	if (fract.color_move == 1)
 	{
-		color += RED(fract.colors.red.sign * sin(cos(fract.julia.r) * i + fract.colors.red.phase) * 230 + 25);
-		color += GREEN(fract.colors.green.sign * sin(cos(fract.julia.i) * i + fract.colors.green.phase) * 230 + 25);
-		color += BLUE(fract.colors.blue.sign * sin(cos(fract.julia.r + fract.julia.i) * i + fract.colors.blue.phase) * 230 + 25);
+		color += RED(fract.colors.red.sign *
+			sin(cos(fract.julia.r) * i + fract.colors.red.phase) * 230 + 25);
+		color += GREEN(fract.colors.green.sign *
+			sin(cos(fract.julia.i) * i + fract.colors.green.phase) * 230 + 25);
+		color += BLUE(fract.colors.blue.sign *
+			sin(cos(fract.julia.r) * i + fract.colors.blue.phase) * 230 + 25);
 	}
 	else
 	{

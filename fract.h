@@ -21,9 +21,6 @@
 # include <pthread.h>
 # include <time.h>
 # include <math.h>
-# include <stdio.h>
-#include <sys/types.h>
-#include <signal.h>
 
 # define GREEN_T "\x1b[32m"
 # define GREY_T "\x1b[37m"
@@ -147,6 +144,9 @@ typedef struct	s_fract
 int				create_color(int red, int green, int blue);
 int				create_color_c(float i, t_fract fract);
 
+/*
+** fract_color_presets.c
+*/
 void					set_colors_grey(t_fract *fract);
 void					set_colors_psyho_barbie(t_fract *fract);
 void					set_colors_dark_cyan(t_fract *fract);
@@ -163,7 +163,6 @@ void			draw(t_fract *fract);
 void			*pixels(void *param);
 int				main(int ac, char **av);
 int				multi_window_checker(int ac, char **av, void *mlx);
-t_fract			*fract_creator(short type, int window_size, void *mlx);
 void			route(int x, int y, t_fract *fract);
 
 /*
@@ -196,11 +195,12 @@ short			define_type(char *s);
 void			ft_err(char *err, int status);
 int				ft_exit(void *param);
 void			usage(void);
-void			info(t_fract *fract);
 
-t_complex		create_complex_j(int x, int y, t_fract *fract);
-
-
+/*
+** fract_utils2.c
+*/
+t_fract			*fract_creator(short type, int window_size, void *mlx);
+int				go(t_fract *fract);
 
 /*
 ** fract_control_utils.c
@@ -217,6 +217,9 @@ void			julia(t_fract *fract, int x, int y);
 void			mandel(t_complex c, t_fract *fract, int x, int y);
 void			newton(t_fract *fract, int x, int y);
 
+/*
+** fract_fract2.c
+*/
 void			mandel_tricorn(t_fract *fract, int x, int y);
 void			mandel_5th(t_fract *fract, int x, int y);
 void			mandel_5th_slim(t_fract *fract, int x, int y);

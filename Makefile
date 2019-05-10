@@ -8,12 +8,15 @@ SRC=	fract_set.c \
 		fract_main.c \
 		fract_line.c \
 		fract_utils.c \
+		fract_utils2.c \
 		fract_color.c \
 		fract_fract.c \
 		fract_fract2.c \
 		fract_dragon.c  \
 		fract_controls.c \
 		fract_control_utils.c \
+		fract_color_presets.c \
+		fract_color_presets2.c \
 		./libft/libft.a
 
 OBJ = $(SRC:%.c=%.o)

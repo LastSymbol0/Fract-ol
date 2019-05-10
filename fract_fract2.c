@@ -23,10 +23,6 @@ void	mandel_tricorn(t_fract *fract, int x, int y)
 	tmp.i = 0;
 	tmp.r = 0;
 	c = create_complex(x, y, fract, 0);
-	// c.r = fract->julia.r;
-	// c.i = fract->julia.i;
-	// c.r = -0.7;
-	// c.i = 0.27015;
 	i = -1;
 	while (++i < fract->max_iters && CARDIOID < 4)
 	{
@@ -53,15 +49,13 @@ void	mandel_5th(t_fract *fract, int x, int y)
 	tmp.i = 0;
 	tmp.r = 0;
 	c = create_complex(x, y, fract, 0);
-	// c.r = fract->julia.r;1
-	// c.i = fract->julia.i;
-	// c.r = -0.7;
-	// c.i = 0.27015;
 	i = -1;
 	while (++i < fract->max_iters && CARDIOID < 4)
 	{
-		r_tmp = pow(tmp.r, 5) - 10 * pow(tmp.r, 3) * pow(tmp.i, 2) + 5 * tmp.r * pow(tmp.i, 4) + c.r;
-		tmp.i = 5 * pow(tmp.r, 4) * tmp.i - 10 * pow(tmp.r, 2) * pow(tmp.i, 3) + pow(tmp.i, 5) + c.i;
+		r_tmp = pow(tmp.r, 5) - 10 * pow(tmp.r, 3) * pow(tmp.i, 2) + 5 * tmp.r
+		* pow(tmp.i, 4) + c.r;
+		tmp.i = 5 * pow(tmp.r, 4) * tmp.i - 10 * pow(tmp.r, 2) * pow(tmp.i, 3)
+		+ pow(tmp.i, 5) + c.i;
 		tmp.r = r_tmp;
 	}
 	continuos_i = i + 1 - (log(2) / sqrt(c.r * c.r + c.i * c.i)) / log(2);
@@ -83,15 +77,13 @@ void	mandel_5th_slim(t_fract *fract, int x, int y)
 	tmp.i = 0;
 	tmp.r = 0;
 	c = create_complex(x, y, fract, 0);
-	// c.r = fract->julia.r;1
-	// c.i = fract->julia.i;
-	// c.r = -0.7;
-	// c.i = 0.27015;
 	i = -1;
 	while (++i < fract->max_iters && CARDIOID < 4)
 	{
-		r_tmp = pow(tmp.r, 5) - 10 * pow(tmp.r, 3) * pow(tmp.i, 2) + 5 * tmp.r * pow(tmp.i, 4) + c.r;
-		tmp.i = 5 * pow(tmp.r, 4) * tmp.i - 10 * pow(tmp.r, 2) * pow(tmp.i, 3) + pow(tmp.i, 5) + c.i;
+		r_tmp = pow(tmp.r, 5) - 10 * pow(tmp.r, 3) * pow(tmp.i, 2) + 5 * tmp.r
+		* pow(tmp.i, 4) + c.r;
+		tmp.i = 5 * pow(tmp.r, 4) * tmp.i - 10 * pow(tmp.r, 2) * pow(tmp.i, 3)
+		+ pow(tmp.i, 5) + c.i;
 		tmp.r = -r_tmp;
 	}
 	continuos_i = i + 1 - (log(2) / sqrt(c.r * c.r + c.i * c.i)) / log(2);

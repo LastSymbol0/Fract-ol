@@ -20,8 +20,6 @@ void	julia(t_fract *fract, int x, int y)
 	t_complex	c;
 	double		r_tmp;
 
-	// c.r = -0.7;
-	// c.i = 0.27015;
 	c.r = fract->julia.r;
 	c.i = fract->julia.i;
 	tmp = create_complex(x, y, fract, 0);
