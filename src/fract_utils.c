@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract.h"
+#include "../fract.h"
 
 t_complex	create_complex(int x, int y, t_fract *fract, short offset)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract.h"
+#include "../fract.h"
 
 int	create_color(int red, int green, int blue)
 {

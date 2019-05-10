@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract.h"
+#include "../fract.h"
 
 void	julia(t_fract *fract, int x, int y)
 {

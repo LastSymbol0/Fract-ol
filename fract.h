@@ -17,7 +17,7 @@
 # include "libft/libft.h"
 # include <fcntl.h>
 # include <unistd.h>
-# include <sys/stat.h> 
+# include <sys/stat.h>
 # include <pthread.h>
 # include <time.h>
 # include <math.h>
@@ -47,7 +47,6 @@
 # define L7 "Reset zoom and position: press 'S' key"
 # define L8 "To crate FdF 'Screen Shot': press 'F' key"
 # define L9 "Mouse move changes: 'M' for julia, 'C' for color"
-
 
 # define CARDIOID  tmp.r * tmp.r + tmp.i * tmp.i
 
@@ -147,14 +146,14 @@ int				create_color_c(float i, t_fract fract);
 /*
 ** fract_color_presets.c
 */
-void					set_colors_grey(t_fract *fract);
-void					set_colors_psyho_barbie(t_fract *fract);
-void					set_colors_dark_cyan(t_fract *fract);
-void					set_colors_purple_lemon(t_fract *fract);
-void					set_colors_red_n_yellow(t_fract *fract);
-void					set_colors_psyho_purple(t_fract *fract);
-void					set_colors_light_cyan(t_fract *fract);
-void					set_colors_hard_shit(t_fract *fract);
+void			set_colors_grey(t_fract *fract);
+void			set_colors_psyho_barbie(t_fract *fract);
+void			set_colors_dark_cyan(t_fract *fract);
+void			set_colors_purple_lemon(t_fract *fract);
+void			set_colors_red_n_yellow(t_fract *fract);
+void			set_colors_psyho_purple(t_fract *fract);
+void			set_colors_light_cyan(t_fract *fract);
+void			set_colors_hard_shit(t_fract *fract);
 
 /*
 ** fract_main.c
@@ -209,6 +208,7 @@ int				exit_proj(t_fract *fract);
 void			redraw(t_fract *fract);
 void			bonus_win(t_fract *fract);
 int				legend(t_fract *fract);
+void			color_presets(int key, t_fract *fract);
 
 /*
 ** fract_fract.c
@@ -224,7 +224,6 @@ void			mandel_tricorn(t_fract *fract, int x, int y);
 void			mandel_5th(t_fract *fract, int x, int y);
 void			mandel_5th_slim(t_fract *fract, int x, int y);
 
-
 /*
 ** fract_fdf.c
 */
@@ -236,14 +235,18 @@ void			fdf(t_fract *fract);
 ** fract_line.c
 */
 void			put_line(t_line line, t_fract fract);
-void			line_y_bigger(t_line line, int delta_x, int delta_y, t_fract fract);
-void			line_x_bigger(t_line line, int delta_x, int delta_y, t_fract fract);
+void			line_y_bigger(t_line line, int delta_x, int delta_y,
+															t_fract fract);
+void			line_x_bigger(t_line line, int delta_x, int delta_y,
+															t_fract fract);
 void			swap_p(t_line *line, int *sign, int *sign_z);
 
 /*
 ** fract_dragon.c
 */
-void	dragon(t_fract *fract);
-
+void			dragon(t_fract *fract);
+t_line			create_line(int x0, int y0, int x1, int y1);
+void			recurs_dragon(t_fract *fract, int max_iters, t_line line,
+															double angle);
 
 #endif

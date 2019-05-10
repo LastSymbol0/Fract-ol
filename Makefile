@@ -2,26 +2,26 @@ NAME= fractol
 
 MLX= -L/usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 
-SRC=	fract_set.c \
-		fract_img.c \
-		fract_fdf.c \
-		fract_main.c \
-		fract_line.c \
-		fract_utils.c \
-		fract_utils2.c \
-		fract_color.c \
-		fract_fract.c \
-		fract_fract2.c \
-		fract_dragon.c  \
-		fract_controls.c \
-		fract_control_utils.c \
-		fract_color_presets.c \
-		fract_color_presets2.c \
+SRC=	src/fract_set.c \
+		src/fract_img.c \
+		src/fract_fdf.c \
+		src/fract_main.c \
+		src/fract_line.c \
+		src/fract_utils.c \
+		src/fract_utils2.c \
+		src/fract_color.c \
+		src/fract_fract.c \
+		src/fract_fract2.c \
+		src/fract_dragon.c  \
+		src/fract_controls.c \
+		src/fract_control_utils.c \
+		src/fract_color_presets.c \
+		src/fract_color_presets2.c \
 		./libft/libft.a
 
 OBJ = $(SRC:%.c=%.o)
 
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 INCLUDES = fract.h
 

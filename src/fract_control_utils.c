@@ -10,16 +10,47 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract.h"
+#include "../fract.h"
+
+void	color_presets(int key, t_fract *fract)
+{
+	if (key == 1)
+		set_(fract);
+	else if (key == 3)
+		fdf(fract);
+	else if (key == 8)
+		fract->color_move = -fract->color_move;
+	else if (key == 15 || key == 18)
+		set_colors_grey(fract);
+	else if (key == 19)
+		set_colors_dark_cyan(fract);
+	else if (key == 20)
+		set_colors_psyho_barbie(fract);
+	else if (key == 21)
+		set_colors_purple_lemon(fract);
+	else if (key == 22)
+		set_colors_red_n_yellow(fract);
+	else if (key == 23)
+		set_colors_psyho_purple(fract);
+	else if (key == 24)
+		set_colors_light_cyan(fract);
+	else if (key == 25)
+		set_colors_hard_shit(fract);
+}
 
 void	redraw(t_fract *fract)
 {
-	fract->optimise_r = 0;
-	fract->optimise_i = 0;
-	mlx_clear_window(fract->mlx->mlx_ptr, fract->mlx->win_ptr);
-	if (fract->iso == 1)
-		mlx_clear_window(fract->mlx->mlx_ptr, fract->mlx->bonus_win_ptr);
-	draw(fract);
+	if (fract->type == 7)
+		dragon(fract);
+	else
+	{
+		fract->optimise_r = 0;
+		fract->optimise_i = 0;
+		mlx_clear_window(fract->mlx->mlx_ptr, fract->mlx->win_ptr);
+		if (fract->iso == 1)
+			mlx_clear_window(fract->mlx->mlx_ptr, fract->mlx->bonus_win_ptr);
+		draw(fract);
+	}
 }
 
 int		exit_proj(t_fract *fract)

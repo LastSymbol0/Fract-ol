@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract.h"
+#include "../fract.h"
 
 void	route(int x, int y, t_fract *fract)
 {

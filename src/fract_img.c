@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract.h"
+#include "../fract.h"
 
 void	pixel_put(t_fract *fract, int x, int y, int color)
 {

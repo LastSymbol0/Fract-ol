@@ -10,20 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract.h"
+#include "../fract.h"
 
 int		mouse_move(int x, int y, t_fract *fract)
 {
-	if (fract->color_move == 1 || 
+	if (fract->color_move == 1 ||
 		((fract->type == 2 || fract->type == 7) && fract->julia_move == 1))
 	{
-
 		fract->julia.r = (float)x / (float)(2500) * 2 - 1;
 		fract->julia.i = (float)y / (float)(1400) * 2 - 1;
-		if (fract->type == 7)
-			dragon(fract);
-		else
-			redraw(fract);
+		redraw(fract);
 	}
 	return (1);
 }
@@ -68,10 +64,10 @@ void	color_exit_reset(int key, t_fract *fract)
 {
 	if (key == 53)
 		ft_exit(NULL);
-	else if (key == 15)
-		set_colors_grey(fract);
-	else if (key == 1)
-		set_(fract);
+	else if (key == 46)
+		fract->julia_move = -fract->julia_move;
+	else if (key == 35)
+		bonus_win(fract);
 	else if (key == 71)
 		fract->colors.red.frequenc += 0.007;
 	else if (key == 86)
@@ -88,30 +84,8 @@ void	color_exit_reset(int key, t_fract *fract)
 
 int		key_controls(int key, t_fract *fract)
 {
-	if (key == 3)
-		fdf(fract);
-	if (key == 8)
-		fract->color_move = -fract->color_move;
-	if (key == 46)
-		fract->julia_move = -fract->julia_move;	
-	if (key == 18)
-		set_colors_grey(fract);
-	if (key == 19)
-		set_colors_dark_cyan(fract);
-	if (key == 20)
-		set_colors_psyho_barbie(fract);
-	if (key == 21)
-		set_colors_purple_lemon(fract);
-	if (key == 22)
-		set_colors_red_n_yellow(fract);
-	if (key == 23)
-		set_colors_psyho_purple(fract);
-	if (key == 24)
-		set_colors_light_cyan(fract);
-	if (key == 25)
-		set_colors_hard_shit(fract);
-	if (key == 35)
-		bonus_win(fract);
+	if (key < 26)
+		color_presets(key, fract);
 	else if (key == 37)
 		return (legend(fract));
 	else if (key == 69)
@@ -132,9 +106,6 @@ int		key_controls(int key, t_fract *fract)
 		fract->move_y -= 20 / fract->zoom;
 	else
 		color_exit_reset(key, fract);
-	if (fract->type == 7)
-		dragon(fract);
-	else
-		redraw(fract);
+	redraw(fract);
 	return (1);
 }

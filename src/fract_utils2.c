@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract.h"
+#include "../fract.h"
 
 t_fract	*fract_creator(short type, int window_size, void *mlx)
 {
